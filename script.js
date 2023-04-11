@@ -17,7 +17,7 @@ class particles {
         this.y = - 40;
         this.size = Math.random()* 10 + 1;
         this.speedX = Math.random()*3 - 1.5;
-        this.speedY =  Math.random()* 3 + 1;
+        this.speedY =  Math.random()* 2 + 1;
         this.color = 'hsl('+ hue + ', 100%, 50% )';
 
     }
@@ -40,7 +40,7 @@ class particles {
 }
 
 function particleCount(){
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 100; i++) {
         particlesArray.push(new particles());
     }
 }
@@ -52,22 +52,22 @@ function handleParticles(){
         particlesArray[i].update();
         particlesArray[i].drawCircle();
 
-        // for (let j = i; j < particlesArray.length; j++) {
-        //     // calculating distance between 2 particles using pythogroas theorem
-        //     const dx =  particlesArray[i].x - particlesArray[j].x;
-        //     const dy =  particlesArray[i].y - particlesArray[j].y;
-        //     const distance = Math.sqrt(dx*dx + dy*dy);
+        for (let j = i; j < particlesArray.length; j++) {
+            // calculating distance between 2 particles using pythogroas theorem
+            const dx =  particlesArray[i].x - particlesArray[j].x;
+            const dy =  particlesArray[i].y - particlesArray[j].y;
+            const distance = Math.sqrt(dx*dx + dy*dy);
 
-        //     if (distance < 400 && distance > 80) {
-        //         ctx.beginPath();
-        //         ctx.strokeStyle = particlesArray[i].color;
-        //         ctx.lineWidth = particlesArray[i].size * 0.2;
-        //         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-        //         ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-        //         ctx.stroke();
+            if (distance < 400 && distance > 80) {
+                ctx.beginPath();
+                ctx.strokeStyle = particlesArray[i].color;
+                ctx.lineWidth = particlesArray[i].size * 0.2;
+                ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                ctx.stroke();
 
-        //     }
-        // }
+            }
+        }
 
         if (particlesArray[i].size < 0.3) {
             particlesArray.splice(i, 1);
